@@ -1,0 +1,1 @@
+sử dụng js, không thể cào bằng requests và beautifulsoup
