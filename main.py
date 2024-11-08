@@ -35,4 +35,3 @@ if response.status_code == 200:
         writer = csv.DictWriter(csvfile, fieldnames=['rank', 'name', 'hours of coded', 'daily average', 'language used'])
         writer.writeheader()
         writer.writerows(data)
-        print('this shit is done')
