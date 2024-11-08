@@ -1,19 +1,22 @@
 import requests
 from bs4 import BeautifulSoup
 
-url = 'https://www.formula1.com/en/results/2024/drivers'
+url = 'https://wakatime.com/leaders/language/html?page=1&country_code=VN'
 response = requests.get(url)
-soup = BeautifulSoup(response.content, 'html.parser')
 
-# Lấy dữ liệu từ bảng
-drivers_table = soup.find('table', class_='resultsarchive-table')
-rows = drivers_table.find_all('tr')
 
-for row in rows[1:]:  # Bỏ qua hàng tiêu đề
-    cols = row.find_all('td')
-    position = cols[0].text.strip()
-    driver = cols[1].text.strip()
-    nationality = cols[2].text.strip()
-    car = cols[3].text.strip()
-    points = cols[4].text.strip()
-    print(f"{position}: {driver} - {nationality} - {car} - {points} points")
+if response.status_code == 200:
+    soup = BeautifulSoup(response.content, 'html.parser')
+    table = soup.find('table', class_='table leaders')
+    rows = table.find_all('tr')
+    for row in rows[1:]:
+        cols = row.findAll('td')
+        rank = cols[0].text
+        name = cols[1].text
+        hours = cols[2].text
+        daily = cols[3].text
+        language = cols[4].text
+        print(f"Rank {rank}:{name}\
+              \nHours of coded: {hours}\
+              \nDaily Average: {daily}\
+              \nLanguage used: {language}\n\n")
